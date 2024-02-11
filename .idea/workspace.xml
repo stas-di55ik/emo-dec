@@ -5,32 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="635bbd5f-a3bc-4da7-8b63-b5b422b2a7a9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/pythonProject.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webApp/db.sqlite3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webApp/main/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webApp/main/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webApp/main/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webApp/main/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webApp/main/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webApp/main/static/main/css/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webApp/main/static/main/img/logo_emodec.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webApp/main/templates/main/about.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webApp/main/templates/main/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webApp/main/templates/main/layout.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webApp/main/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webApp/main/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webApp/main/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webApp/manage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webApp/webApp/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webApp/webApp/asgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webApp/webApp/settings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webApp/webApp/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webApp/webApp/wsgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webApp/main/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webApp/main/templates/main/contacts.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webApp/main/templates/main/faceEmotionDetection.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webApp/main/templates/main/igPublicationAudit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webApp/main/templates/main/textSentimentAnalysis.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webApp/main/static/main/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/main/static/main/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webApp/main/templates/main/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/main/templates/main/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webApp/main/templates/main/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/main/templates/main/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webApp/main/templates/main/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/main/templates/main/layout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webApp/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/main/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webApp/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/main/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webApp/webApp/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/webApp/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +27,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="HTML File" />
         <option value="Python Script" />
       </list>
     </option>
@@ -61,10 +49,11 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
     "Python.settings.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true"
   }
 }]]></component>
@@ -89,6 +78,15 @@
       <option name="presentableId" value="Default" />
       <updated>1707048772013</updated>
     </task>
+    <task id="LOCAL-00001" summary="soft start">
+      <option name="closed" value="true" />
+      <created>1707090252577</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1707090252577</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -104,5 +102,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="soft start" />
+    <option name="LAST_COMMIT_MESSAGE" value="soft start" />
   </component>
 </project>

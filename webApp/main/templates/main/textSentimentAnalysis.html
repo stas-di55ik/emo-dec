@@ -1,0 +1,14 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Text sentiment analysis{% endblock %}
+
+{% block content %}
+    <div class="features">
+        <h1>Text sentiment analysis</h1>
+        <form method="post">
+            {% csrf_token %}
+            <textarea class="form-control" placeholder="Enter text for sentiment analysis"></textarea><br>
+            <button class="btn btn-warning" type="submit">Analyze</button>
+        </form>
+    </div>
+{% endblock %}
