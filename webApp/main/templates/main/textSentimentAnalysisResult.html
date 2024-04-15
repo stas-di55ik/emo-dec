@@ -1,0 +1,16 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Text sentiment analysis{% endblock %}
+
+{% block content %}
+    <div class="features">
+        <h1>Text sentiment analysis result</h1><br>
+        <p><b>Input text:</b> {{ input_text }}</p>
+        <p><i class="fa-regular fa-face-smile"></i> Positive sentiment: <b>{{ result.positive }}</b></p>
+        <p><i class="fa-regular fa-face-frown-open"></i> Negative sentiment: <b>{{ result.negative }}</b></p>
+        <p><i class="fa-regular fa-face-meh"></i> Neutral sentiment: <b>{{ result.neutrality }}</b></p>
+        {% if plot_succeed %}
+            <img src="{{ plot_path }}" alt="The result of dictionary analysis">
+        {% endif %}
+    </div>
+{% endblock %}
