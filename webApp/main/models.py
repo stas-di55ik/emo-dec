@@ -13,6 +13,9 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
+import cv2
+from deepface import DeepFace
+
 
 class SentimentAnalysisSource(models.Model):
     text = models.TextField('Text')
@@ -80,26 +83,62 @@ class TextSentimentAnalyser:
     def sentiment_analyse(input_text):
         score = SentimentIntensityAnalyzer().polarity_scores(input_text)
 
-        return {'negative': f'{math.floor(score['neg'] * 100)}%',
-                'positive': f'{math.floor(score['pos'] * 100)}%',
-                'neutrality': f'{math.floor(score['neu'] * 100)}%'}
+        return {
+            'negative': f'{round(score['neg'] * 100, 2)}%',
+            'positive': f'{round(score['pos'] * 100, 2)}%',
+            'neutrality': f'{round(score['neu'] * 100, 2)}%'
+        }
 
     @staticmethod
     def plot(emotion_list, timestamp):
         fig, ax1 = plt.subplots()
         ax1.bar(emotion_list.keys(), emotion_list.values())
         fig.autofmt_xdate()
-        filename = f"main/static/main/tmp/textAnalysis/{timestamp}graph.png"
+        filename = f"main/static/main/tmp/textAnalysis/{timestamp}_graph.png"
         plt.savefig(filename)
 
         return filename
 
-# test = TextSentimentAnalyser.analyze('lol kek insecure', math.floor(datetime.datetime.now().timestamp() * 1000000))
 
+class PhotoEmotionDetector:
+    @staticmethod
+    def analyze(input_file_path, timestamp):
+        img = cv2.imread(input_file_path)
+        try:
+            predictions = DeepFace.analyze(img)
 
-# class FaceEmotionRecognitionSource(models.Model):
-#     img = models.ImageField
-#
-#     def __str__(self):
-#         return self.img
+            return {'status': True, 'result': PhotoEmotionDetector.handle_predictions(predictions, img, timestamp)}
+        except:
+            return {'status': False}
 
+    @staticmethod
+    def crop_face(img, region, index, timestamp):
+        cropped_image = img[region['y']:region['y'] + region['h'], region['x']:region['x'] + region['w']]
+        file_path = f"main/static/main/tmp/photoAnalysis/res/{index}_{timestamp}_face.png"
+        cv2.imwrite(file_path, cropped_image)
+
+        return file_path
+
+    @staticmethod
+    def handle_predictions(predictions, img, timestamp):
+        result = []
+        for index, value in enumerate(predictions):
+            print(f'index: {index}, emotion: {value['emotion']}, region: {value['region']}')
+            result.append({
+                'emotion': PhotoEmotionDetector.formalize_answer(value['emotion']),
+                'file_path': PhotoEmotionDetector.crop_face(img, value['region'], index, timestamp)
+            })
+
+        return result
+
+    @staticmethod
+    def formalize_answer(emotion):
+        return {
+            'angry': f'{round(emotion['angry'], 2)}%',
+            'disgust': f'{round(emotion['disgust'], 2)}%',
+            'fear': f'{round(emotion['fear'], 2)}%',
+            'happy': f'{round(emotion['happy'], 2)}%',
+            'sad': f'{round(emotion['sad'], 2)}%',
+            'surprise': f'{round(emotion['surprise'], 2)}%',
+            'neutral': f'{round(emotion['neutral'], 2)}%',
+        }

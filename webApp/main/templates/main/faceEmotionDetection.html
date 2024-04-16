@@ -5,22 +5,26 @@
 {% block content %}
     <div class="features">
         <h1>Photo emotion detection</h1>
-        <form method="post" enctype="multipart/form-data">
+        <form id="uploadForm" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-
-            <!--            {{ form.text }} <br>-->
-
-                <p>Select a photo to analyze:</p>
-                <input type="file" id="input_img" name="input_img" accept=".png, .jpg, .jpeg" /><br>
-
-            <!--            <span>{{ error }}</span>-->
-            <div id="image_preview"></div>
-            <div>
-                <button class="btn btn-warning" type="submit">Analyze</button>
-            </div>
+            <p>Select a photo to analyze:</p>
+            <input type="file" id="input_img" name="input_img" accept=".png, .jpg, .jpeg" /><br>
+            <div id="imagePreview"></div>
+            <button class="btn btn-warning" type="button" id="analyzeBtn">Analyze</button>
+            <span id="errorMessage" style="color: red; display: none;">Please select a file.</span>
         </form>
     </div>
+
     <script>
+        document.getElementById('analyzeBtn').addEventListener('click', function() {
+            var fileInput = document.getElementById('input_img');
+            if (fileInput.files.length === 0) {
+                document.getElementById('errorMessage').style.display = 'block';
+            } else {
+                document.getElementById('uploadForm').submit();
+            }
+        });
+
         document.getElementById('input_img').addEventListener('change', function() {
             var file = this.files[0];
             if (file) {
@@ -29,8 +33,8 @@
                     var imgElement = document.createElement('img');
                     imgElement.src = event.target.result;
                     imgElement.style.maxWidth = '100%';
-                    document.getElementById('image_preview').innerHTML = '';
-                    document.getElementById('image_preview').appendChild(imgElement);
+                    document.getElementById('imagePreview').innerHTML = '';
+                    document.getElementById('imagePreview').appendChild(imgElement);
                 };
                 reader.readAsDataURL(file);
             }

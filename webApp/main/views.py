@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from .forms import SentimentAnalysisSourceForm
-from .models import TextSentimentAnalyser
+from .models import TextSentimentAnalyser, PhotoEmotionDetector
 
 import os
 from threading import Timer
@@ -23,6 +23,19 @@ def contacts(request):
 
 
 def faceEmotionDetection(request):
+    if request.method == 'POST' and request.FILES.get('input_img'):
+        timestamp = math.floor(datetime.datetime.now().timestamp() * 1000000)
+        input_file = request.FILES['input_img']
+
+        input_file_path = f'main/static/main/tmp/photoAnalysis/req/{timestamp}_{input_file.name}'
+        with open(input_file_path, 'wb') as destination:
+            for chunk in input_file.chunks():
+                destination.write(chunk)
+        print(f'Uploaded image saved at ({timestamp}):', input_file_path)
+
+        result = PhotoEmotionDetector.analyze(input_file_path, timestamp)
+        print(result)
+
     return render(request, 'main/faceEmotionDetection.html')
 
 
