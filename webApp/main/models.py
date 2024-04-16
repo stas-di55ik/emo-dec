@@ -95,3 +95,11 @@ class TextSentimentAnalyser:
         return filename
 
 # test = TextSentimentAnalyser.analyze('lol kek insecure', math.floor(datetime.datetime.now().timestamp() * 1000000))
+
+
+# class FaceEmotionRecognitionSource(models.Model):
+#     img = models.ImageField
+#
+#     def __str__(self):
+#         return self.img
+

@@ -3,8 +3,37 @@
 {% block title %}Face emotion detection{% endblock %}
 
 {% block content %}
-        <div class="features">
-        <h1>Face emotion detection</h1>
-        <p>The story of the Loch Ness Monster started long ago in Scotland. People have been talking about it for many years because Loch Ness, the lake where it's said to live, is deep and dark, making it easy to imagine mysterious creatures lurking below. Some folks think the monster might be a leftover dinosaur called a plesiosaur that somehow survived. They point to blurry photos and strange readings on sonar machines as evidence. But others say these sightings are likely just mistakes, like seeing logs or big fish and thinking they're something else.</p>
+    <div class="features">
+        <h1>Photo emotion detection</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!--            {{ form.text }} <br>-->
+
+                <p>Select a photo to analyze:</p>
+                <input type="file" id="input_img" name="input_img" accept=".png, .jpg, .jpeg" /><br>
+
+            <!--            <span>{{ error }}</span>-->
+            <div id="image_preview"></div>
+            <div>
+                <button class="btn btn-warning" type="submit">Analyze</button>
+            </div>
+        </form>
     </div>
+    <script>
+        document.getElementById('input_img').addEventListener('change', function() {
+            var file = this.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(event) {
+                    var imgElement = document.createElement('img');
+                    imgElement.src = event.target.result;
+                    imgElement.style.maxWidth = '100%';
+                    document.getElementById('image_preview').innerHTML = '';
+                    document.getElementById('image_preview').appendChild(imgElement);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 {% endblock %}
