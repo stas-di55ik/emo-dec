@@ -36,6 +36,32 @@ def faceEmotionDetection(request):
         result = PhotoEmotionDetector.analyze(input_file_path, timestamp)
         print(result)
 
+        if result['status']:
+            result_for_web = []
+            for element in result['result']:
+                Timer(7.0, lambda el=element: os.remove(el['file_path'])).start()
+                result_for_web.append({
+                    'emotion': element['emotion'],
+                    'file_path': element['file_path'].lstrip()[5:]
+                })
+            Timer(7.0, lambda: os.remove(input_file_path)).start()
+
+            web_dict = {
+                'status': result['status'],
+                'result': result_for_web,
+                'input_file_path': input_file_path.lstrip()[5:]
+            }
+
+            return render(request, 'main/faceEmotionDetectionResult.html', web_dict)
+        else:
+            Timer(7.0, lambda: os.remove(input_file_path)).start()
+            web_dict = {
+                'status': result['status'],
+                'input_file_path': input_file_path.lstrip()[5:]
+            }
+
+            return render(request, 'main/faceEmotionDetectionResult.html', web_dict)
+
     return render(request, 'main/faceEmotionDetection.html')
 
 
@@ -57,6 +83,7 @@ def textSentimentAnalysis(request):
             return render(request, 'main/textSentimentAnalysisResult.html', web_dict)
         else:
             error = 'The form is invalid!'
+
     form = SentimentAnalysisSourceForm()
     data = {
         'form': form,

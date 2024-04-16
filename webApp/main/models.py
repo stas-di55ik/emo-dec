@@ -123,7 +123,7 @@ class PhotoEmotionDetector:
     def handle_predictions(predictions, img, timestamp):
         result = []
         for index, value in enumerate(predictions):
-            print(f'index: {index}, emotion: {value['emotion']}, region: {value['region']}')
+            # print(f'index: {index}, emotion: {value['emotion']}, region: {value['region']}')
             result.append({
                 'emotion': PhotoEmotionDetector.formalize_answer(value['emotion']),
                 'file_path': PhotoEmotionDetector.crop_face(img, value['region'], index, timestamp)

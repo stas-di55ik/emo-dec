@@ -1,0 +1,26 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Photo emotion detection{% endblock %}
+
+{% block content %}
+    <div class="features">
+        <h1>Facial emotion recognition</h1><br>
+        <p><b>Input photo:</b></p>
+        <img src="{{ input_file_path }}" alt="Input photo"><br>
+        <p><b>Result:</b></p>
+        {% if status %}
+            {% for element in result%}
+                <img src="{{ element.file_path }}" alt="The cropped face">
+                <p><i class="fa-regular fa-face-angry"></i> Angry: <b>{{ element.emotion.angry }}</b></p>
+                <p><i class="fa-regular fa-face-grimace"></i> Disgust: <b>{{ element.emotion.disgust }}</b></p>
+                <p><i class="fa-regular fa-face-flushed"></i> Fear: <b>{{ element.emotion.fear }}</b></p>
+                <p><i class="fa-regular fa-face-smile-beam"></i> Happy: <b>{{ element.emotion.happy }}</b></p>
+                <p><i class="fa-regular fa-face-surprise"></i> Surprise: <b>{{ element.emotion.surprise }}</b></p>
+                <p><i class="fa-regular fa-face-frown"></i> Sad: <b>{{ element.emotion.sad }}</b></p>
+                <p><i class="fa-regular fa-face-meh"></i> Neutral: <b>{{ element.emotion.neutral }}</b></p>
+            {% endfor %}
+        {% else %}
+            <p>Unfortunately, an ERROR occurred while analyzing the photo, please try another one.</p>
+        {% endif %}
+    </div>
+{% endblock %}
