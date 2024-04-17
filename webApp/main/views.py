@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from .forms import SentimentAnalysisSourceForm
-from .models import TextSentimentAnalyser, PhotoEmotionDetector
+from .models import TextSentimentAnalyser, PhotoEmotionDetector, InstagramAPIHelper
 
 import os
 from threading import Timer
@@ -9,6 +9,7 @@ from threading import Timer
 import datetime
 import math
 
+from .secrets import IG_APP_ID, IG_APP_SECRET
 
 def index(request):
     return render(request, 'main/index.html')
@@ -94,4 +95,14 @@ def textSentimentAnalysis(request):
 
 
 def igPublicationAudit(request):
-    return render(request, 'main/igPublicationAudit.html')
+    login_url = ''
+    if request.method == 'POST':
+        ig_helper = InstagramAPIHelper(IG_APP_ID, IG_APP_SECRET)
+        ig_helper.initialize_api()
+        login_url = ig_helper.get_login_url()
+
+
+
+    data = {'login_url': login_url}
+
+    return render(request, 'main/igPublicationAudit.html', data)

@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="635bbd5f-a3bc-4da7-8b63-b5b422b2a7a9" name="Changes" comment="FER almost finished">
+    <list default="true" id="635bbd5f-a3bc-4da7-8b63-b5b422b2a7a9" name="Changes" comment="FER finished">
       <change afterPath="$PROJECT_DIR$/.venv/Lib/site-packages/Jinja2-3.1.3.dist-info/INSTALLER" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.venv/Lib/site-packages/Markdown-3.6.dist-info/INSTALLER" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.venv/Lib/site-packages/MarkupSafe-2.1.5.dist-info/LICENSE.rst" afterDir="false" />
@@ -2768,13 +2768,13 @@
       <change afterPath="$PROJECT_DIR$/.venv/Lib/site-packages/~ensorflow/xla_aot_runtime_src/xla/service/cpu/runtime_matmul_common.h" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.venv/Lib/site-packages/~ensorflow/xla_aot_runtime_src/xla/service/cpu/runtime_matmul_f32.cc" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.venv/Lib/site-packages/~ensorflow/xla_aot_runtime_src/xla/service/cpu/runtime_single_threaded_matmul_s32.cc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.venv/Scripts/rst2s5.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webApp/main/templates/main/faceEmotionDetectionResult.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webApp/main/secrets.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webApp/main/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/main/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webApp/main/services/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/.venv/Lib/site-packages/deepface/detectors/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webApp/main/services/faceEmotionDetector/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/.venv/Lib/site-packages/joblib/test/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webApp/main/services/faceEmotionDetector/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/.venv/Lib/site-packages/matplotlib/_ttconv.pyi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webApp/main/templates/main/igPublicationAudit.html" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/main/templates/main/igPublicationAudit.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webApp/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/main/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -2790,8 +2790,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -2812,23 +2812,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Python.main (1).executor": "Run",
-    "Python.main (2).executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.setting.executor": "Run",
-    "Python.settings.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/User/Desktop/emo-dec/pythonProject/webApp/main/templates/main",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Python.main (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.main (2).executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.setting.executor&quot;: &quot;Run&quot;,
+    &quot;Python.settings.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/Desktop/emo-dec/pythonProject/webApp/main/templates/main&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\User\Desktop\emo-dec\pythonProject\webApp\main\templates\main" />
@@ -2981,7 +2981,23 @@
       <option name="project" value="LOCAL" />
       <updated>1713278570977</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="FER finished">
+      <option name="closed" value="true" />
+      <created>1713300171943</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1713300171943</updated>
+    </task>
+    <task id="LOCAL-00005" summary="FER finished">
+      <option name="closed" value="true" />
+      <created>1713300198153</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1713300198153</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -3002,7 +3018,8 @@
     <MESSAGE value="added sentiment analysis text" />
     <MESSAGE value="FER soft start" />
     <MESSAGE value="FER almost finished" />
-    <option name="LAST_COMMIT_MESSAGE" value="FER almost finished" />
+    <MESSAGE value="FER finished" />
+    <option name="LAST_COMMIT_MESSAGE" value="FER finished" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

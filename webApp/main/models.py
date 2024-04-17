@@ -16,6 +16,9 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import cv2
 from deepface import DeepFace
 
+from instagram_basic_display.InstagramBasicDisplay import InstagramBasicDisplay
+import requests
+
 
 class SentimentAnalysisSource(models.Model):
     text = models.TextField('Text')
@@ -142,3 +145,24 @@ class PhotoEmotionDetector:
             'surprise': f'{round(emotion['surprise'], 2)}%',
             'neutral': f'{round(emotion['neutral'], 2)}%',
         }
+
+
+class InstagramAPIHelper:
+    def __init__(self, ig_app_id, ig_app_secret):
+        self.ig_app_id = ig_app_id
+        self.ig_app_secret = ig_app_secret
+        self.api = None
+
+    def initialize_api(self):
+        self.api = InstagramBasicDisplay(
+            app_id=self.ig_app_id,
+            app_secret=self.ig_app_secret,
+            redirect_url='https://www.google.com.ua/?hl=uk'
+        )
+
+    def get_login_url(self):
+        if self.api is None:
+            self.initialize_api()
+
+        return self.api.get_login_url()
+
