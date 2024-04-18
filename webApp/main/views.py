@@ -8,8 +8,10 @@ from threading import Timer
 
 import datetime
 import math
+import time
 
 from .secrets import IG_APP_ID, IG_APP_SECRET
+
 
 def index(request):
     return render(request, 'main/index.html')
@@ -95,14 +97,16 @@ def textSentimentAnalysis(request):
 
 
 def igPublicationAudit(request):
-    login_url = ''
+    ig_helper = InstagramAPIHelper(IG_APP_ID, IG_APP_SECRET)
+    ig_helper.initialize_api()
+    login_url = ig_helper.get_login_url()
+
     if request.method == 'POST':
-        ig_helper = InstagramAPIHelper(IG_APP_ID, IG_APP_SECRET)
-        ig_helper.initialize_api()
-        login_url = ig_helper.get_login_url()
+        ig_helper.init_token(request)
+        profile_data = ig_helper.get_profile_data()
+        print(profile_data)
 
-
-
+        return render(request, 'main/igPublicationAuditProfile.html', profile_data)
     data = {'login_url': login_url}
 
     return render(request, 'main/igPublicationAudit.html', data)

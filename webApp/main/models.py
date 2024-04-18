@@ -18,6 +18,7 @@ from deepface import DeepFace
 
 from instagram_basic_display.InstagramBasicDisplay import InstagramBasicDisplay
 import requests
+from .secrets import IG_ACCESS_TOKEN
 
 
 class SentimentAnalysisSource(models.Model):
@@ -157,7 +158,7 @@ class InstagramAPIHelper:
         self.api = InstagramBasicDisplay(
             app_id=self.ig_app_id,
             app_secret=self.ig_app_secret,
-            redirect_url='https://www.google.com.ua/?hl=uk'
+            redirect_url='https://www.google.com.ua/?hl=uk',
         )
 
     def get_login_url(self):
@@ -166,3 +167,13 @@ class InstagramAPIHelper:
 
         return self.api.get_login_url()
 
+    def init_token(self, request):
+        # code = request.args.get('code')
+        # short_lived_token = self.api.get_o_auth_token(code)
+        # long_lived_token = self.api.get_long_lived_token(short_lived_token.get('access_token'))
+        # access_token = long_lived_token.access_token
+        access_token = IG_ACCESS_TOKEN
+        self.api.set_access_token(access_token)
+
+    def get_profile_data(self):
+        return {'profile': self.api.get_user_profile(), 'user_media': self.api.get_user_media()}

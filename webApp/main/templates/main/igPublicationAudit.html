@@ -3,18 +3,23 @@
 {% block title %}IG publication audit{% endblock %}
 
 {% block content %}
-        <div class="features">
+    <div class="features">
         <h1>Instagram publication audit</h1>
+        <div>
+            <p>Please log in to Instagram before performing the analysis</p>
+        </div>
         <form method="post">
             {% csrf_token %}
-            {% if login_url %}
-                <div>
-                    <a href="{{ login_url }}">Use this link to authorize in Instagram</a>
-                </div>
-            {% endif %}
             <div>
-                <button class="btn btn-warning" type="submit">Init</button>
+                <button onclick="openLinkInNewTab()" class="btn btn-warning" type="submit">Authorize</button>
             </div>
         </form>
+        <script>
+            function openLinkInNewTab() {
+                var url =  decodeURIComponent("{{ login_url|safe }}");
+                var win = window.open(url, '_blank');
+                win.focus();
+            }
+        </script>
     </div>
 {% endblock %}
