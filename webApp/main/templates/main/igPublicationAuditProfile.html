@@ -1,10 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'main/layout.html' %}
 
-</body>
-</html>
+{% block title %}Instagram profile{% endblock %}
+
+{% block content %}
+    <div class="features">
+        <h1>Your Instagram profile</h1><br>
+        <p>Username: <b>{{ profile.username }}</b></p>
+        <p>Media count: <b>{{ profile.media_count }}</b></p>
+        {% for publication in user_media.data %}
+        <form method="post">
+            {% csrf_token %}
+            {% if publication.caption %}
+                <p><b>Caption:</b> {{ publication.caption }}</p>
+            {% else %}
+                <p><b>Caption:</b> No caption</p>
+            {% endif %}
+
+            {% if publication.media_type == 'CAROUSEL_ALBUM' %}
+                <p><b>Media type:</b> {{ publication.media_type }}</p>
+                {% for child in publication.children.data %}
+                    {% if child.media_type == 'IMAGE' %}
+                        <p><b>Item media type:</b> {{ child.media_type }}</p>
+                        <img src="{{ child.media_url }}" alt="IMAGE" width="420" height="480">
+                    {% elif child.media_type == 'VIDEO' %}
+                        <p><b>Item media type:</b> {{ child.media_type }}</p>
+                        <p style="color: red;"><b>Unfortunately, videos cannot be analyzed</b></p>
+                        <video width="480" height="360" controls>
+                            <source src="{{ child.media_url }}" type="video/mp4">
+                        </video>
+                    {% else %}
+                         <p><b>Item media type:</b> {{ child.media_type }}</p>
+                    {% endif %}
+                {% endfor %}
+
+            {% elif publication.media_type == 'IMAGE' %}
+                <p><b>Media type:</b> {{ publication.media_type }}</p>
+                <img src="{{ publication.media_url }}" alt="IMAGE" width="420" height="480">
+
+            {% elif publication.media_type == 'VIDEO' %}
+                <p><b>Media type:</b> {{ publication.media_type }}</p>
+                <p style="color: red;"><b>Unfortunately, videos cannot be analyzed</b></p>
+                <video width="480" height="360" controls>
+                    <source src="{{ publication.media_url }}" type="video/mp4">
+                </video>
+            {% else %}
+                <p><b>Media type:</b> {{ publication.media_type }}</p>
+            {% endif %}
+
+            <div>
+                <input type="hidden" name="publication_id" value="{{ publication.id }}">
+                <button class="btn btn-warning" type="submit">Analyze</button>
+            </div>
+        </form>
+        {% endfor %}
+    </div>
+{% endblock %}
