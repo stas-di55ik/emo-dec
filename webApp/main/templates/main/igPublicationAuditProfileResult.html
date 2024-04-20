@@ -1,0 +1,46 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}IG publication audit{% endblock %}
+
+{% block content %}
+    <div class="features">
+        <h1>Instagram publication audit</h1>
+        <h2>Text sentiment analysis</h2><br>
+        {% if tsa_succeed %}
+            <p><b>Input text:</b> {{ tsa_web_dict.input_text }}</p>
+            <p><i class="fa-regular fa-face-smile"></i> Positive sentiment: <b>{{ tsa_web_dict.result.positive }}</b></p>
+            <p><i class="fa-regular fa-face-frown-open"></i> Negative sentiment: <b>{{ tsa_web_dict.result.negative }}</b></p>
+            <p><i class="fa-regular fa-face-meh"></i> Neutral sentiment: <b>{{ tsa_web_dict.result.neutrality }}</b></p>
+            {% if tsa_web_dict.plot_succeed %}
+                <img src="{{ tsa_web_dict.plot_path }}" alt="The result of dictionary analysis">
+            {% endif %}
+        {% else %}
+            <p><b>Unfortunately, this publication does not have a caption</b></p>
+        {% endif %}
+
+        <h2>Facial emotion recognition</h2>
+        {% if fer_succeed %}
+            {% for item in fer_web_dicts %}
+                <p><b>Input photo:</b></p>
+                <img src="{{ item.input_file_path }}" alt="Input photo"><br>
+                <p><b>Result:</b></p>
+                {% if item.status %}
+                    {% for element in item.result%}
+                        <img src="{{ element.file_path }}" alt="The cropped face">
+                        <p><i class="fa-regular fa-face-angry"></i> Angry: <b>{{ element.emotion.angry }}</b></p>
+                        <p><i class="fa-regular fa-face-grimace"></i> Disgust: <b>{{ element.emotion.disgust }}</b></p>
+                        <p><i class="fa-regular fa-face-flushed"></i> Fear: <b>{{ element.emotion.fear }}</b></p>
+                        <p><i class="fa-regular fa-face-smile-beam"></i> Happy: <b>{{ element.emotion.happy }}</b></p>
+                        <p><i class="fa-regular fa-face-surprise"></i> Surprise: <b>{{ element.emotion.surprise }}</b></p>
+                        <p><i class="fa-regular fa-face-frown"></i> Sad: <b>{{ element.emotion.sad }}</b></p>
+                        <p><i class="fa-regular fa-face-meh"></i> Neutral: <b>{{ element.emotion.neutral }}</b></p>
+                    {% endfor %}
+                {% else %}
+                    <p>Unfortunately, an ERROR occurred while analyzing the photo, please try another one.</p>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <p><b>Unfortunately, this publication does not have any image</b></p>
+        {% endif %}
+    </div>
+{% endblock %}
