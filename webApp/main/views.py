@@ -31,41 +31,13 @@ def faceEmotionDetection(request):
     if request.method == 'POST' and request.FILES.get('input_img'):
         timestamp = math.floor(datetime.datetime.now().timestamp() * 1000000)
         input_file = request.FILES['input_img']
-
-        input_file_path = f'main/static/main/tmp/photoAnalysis/req/{timestamp}_{input_file.name}'
-        with open(input_file_path, 'wb') as destination:
-            for chunk in input_file.chunks():
-                destination.write(chunk)
-        print(f'Uploaded image saved at ({timestamp}):', input_file_path)
-
-        result = PhotoEmotionDetector.analyze(input_file_path, timestamp)
+        input_file_name = f'{timestamp}_{input_file.name}'
+        input_file_path = f'main/static/main/tmp/photoAnalysis/req/{input_file_name}'
+        download_image_from_web(input_file, input_file_path)
+        result = PhotoEmotionDetector.analyze(input_file_path, input_file_name)
         print(result)
 
-        if result['status']:
-            result_for_web = []
-            for element in result['result']:
-                Timer(7.0, lambda el=element: os.remove(el['file_path'])).start()
-                result_for_web.append({
-                    'emotion': element['emotion'],
-                    'file_path': element['file_path'].lstrip()[5:]
-                })
-            Timer(7.0, lambda: os.remove(input_file_path)).start()
-
-            web_dict = {
-                'status': result['status'],
-                'result': result_for_web,
-                'input_file_path': input_file_path.lstrip()[5:]
-            }
-
-            return render(request, 'main/faceEmotionDetectionResult.html', web_dict)
-        else:
-            Timer(7.0, lambda: os.remove(input_file_path)).start()
-            web_dict = {
-                'status': result['status'],
-                'input_file_path': input_file_path.lstrip()[5:]
-            }
-
-            return render(request, 'main/faceEmotionDetectionResult.html', web_dict)
+        return render(request, 'main/faceEmotionDetectionResult.html', prepare_fer_web_dict(result, input_file_path))
 
     return render(request, 'main/faceEmotionDetection.html')
 
@@ -78,14 +50,8 @@ def textSentimentAnalysis(request):
             input_text = form.cleaned_data['text']
             timestamp = math.floor(datetime.datetime.now().timestamp() * 1000000)
             result = TextSentimentAnalyser.analyze(input_text, timestamp)
-            Timer(5.0, lambda: os.remove(result['plot_path'])).start()
 
-            web_dict = {'result': result['result'],
-                        'plot_path': result['plot_path'].lstrip()[5:],
-                        'plot_succeed': bool(result['emotion_list']),
-                        'input_text': result['input_text']}
-
-            return render(request, 'main/textSentimentAnalysisResult.html', web_dict)
+            return render(request, 'main/textSentimentAnalysisResult.html', prepare_tsa_web_dict(result))
         else:
             error = 'The form is invalid!'
 
@@ -120,43 +86,62 @@ def igPublicationAuditProfile(request):
         timestamp = math.floor(datetime.datetime.now().timestamp() * 1000000)
         input_publication_id = request.POST.get('publication_id')
 
+        tsa_succeed = False
+        tsa_web_dict = {}
+        fer_succeed = False
+        fer_web_dicts = []
+
         existing = {}
         for publication in profile_data['user_media']['data']:
             if input_publication_id == publication['id']:
                 existing = publication
 
-        if existing['caption']:
+        if 'caption' in existing:
+            tsa_succeed = True
             tsa_result = TextSentimentAnalyser.analyze(existing['caption'], timestamp)
-            # Timer(15.0, lambda: os.remove(tsa_result['plot_path'])).start()
+            tsa_web_dict = prepare_tsa_web_dict(tsa_result)
 
-            tsa_web_dict = {'result': tsa_result['result'],
-                            'plot_path': tsa_result['plot_path'].lstrip()[5:],
-                            'plot_succeed': bool(tsa_result['emotion_list']),
-                            'input_text': tsa_result['input_text']}
-        else:
-            tsa_result = False
-
-        image_paths = []
+        input_images = []
         if existing['media_type'] == 'CAROUSEL_ALBUM':
             for item in existing['children']['data']:
                 if item['media_type'] == 'IMAGE':
-                    file_path = f'main/static/main/tmp/photoAnalysis/req/{timestamp}_{item['id']}.jpg'
-                    download_status = download_image(item['media_url'], file_path)
+                    file_name = f'{timestamp}_{item['id']}.jpg'
+                    file_path = f'main/static/main/tmp/photoAnalysis/req/{file_name}'
+                    download_status = download_image_by_url(item['media_url'], file_path)
                     if download_status:
-                        image_paths.append(file_path)
+                        input_images.append({'file_name': file_name, 'file_path': file_path})
 
         if existing['media_type'] == 'IMAGE':
-            file_path = f'main/static/main/tmp/photoAnalysis/req/{timestamp}_{existing['id']}.jpg'
-            download_status = download_image(existing['media_url'], file_path)
+            file_name = f'{timestamp}_{existing['id']}.jpg'
+            file_path = f'main/static/main/tmp/photoAnalysis/req/{file_name}'
+            download_status = download_image_by_url(existing['media_url'], file_path)
             if download_status:
-                image_paths.append(file_path)
+                input_images.append({'file_name': file_name, 'file_path': file_path})
 
-        print(f'image_paths: {image_paths}')
+        if len(input_images) > 0:
+            fer_succeed = True
+            for img in input_images:
+                result = PhotoEmotionDetector.analyze(img['file_path'], img['file_name'])
+                fer_web_dicts.append(prepare_fer_web_dict(result, img['file_path']))
+
+        return render(request, 'main/igPublicationAuditProfileResult.html', {
+            'tsa_succeed': tsa_succeed,
+            'tsa_web_dict': tsa_web_dict,
+            'fer_succeed': fer_succeed,
+            'fer_web_dicts': fer_web_dicts
+        })
 
     return render(request, 'main/igPublicationAuditProfile.html', profile_data)
 
 
-def download_image(url, save_path):
+def download_image_from_web(input_file, input_file_path):
+    with open(input_file_path, 'wb') as destination:
+        for chunk in input_file.chunks():
+            destination.write(chunk)
+    print(f'Uploaded image saved at:', input_file_path)
+
+
+def download_image_by_url(url, save_path):
     try:
         response = requests.get(url)
         response.raise_for_status()
@@ -169,3 +154,41 @@ def download_image(url, save_path):
         print(f"Error downloading image: {e}")
 
         return False
+
+
+def prepare_fer_web_dict(result, input_file_path):
+    if result['status']:
+        result_for_web = []
+        for element in result['result']:
+            Timer(120.0, lambda el=element: os.remove(el['file_path'])).start()
+            result_for_web.append({
+                'emotion': element['emotion'],
+                'file_path': element['file_path'].lstrip()[5:]
+            })
+        Timer(120.0, lambda: os.remove(input_file_path)).start()
+
+        web_dict = {
+            'status': result['status'],
+            'result': result_for_web,
+            'input_file_path': input_file_path.lstrip()[5:]
+        }
+
+    else:
+        Timer(120.0, lambda: os.remove(input_file_path)).start()
+        web_dict = {
+            'status': result['status'],
+            'input_file_path': input_file_path.lstrip()[5:]
+        }
+
+    return web_dict
+
+
+def prepare_tsa_web_dict(result):
+    Timer(120.0, lambda: os.remove(result['plot_path'])).start()
+
+    return {
+        'result': result['result'],
+        'plot_path': result['plot_path'].lstrip()[5:],
+        'plot_succeed': bool(result['emotion_list']),
+        'input_text': result['input_text']
+    }

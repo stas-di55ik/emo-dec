@@ -106,19 +106,19 @@ class TextSentimentAnalyser:
 
 class PhotoEmotionDetector:
     @staticmethod
-    def analyze(input_file_path, timestamp):
+    def analyze(input_file_path, input_file_name):
         img = cv2.imread(input_file_path)
         try:
             predictions = DeepFace.analyze(img)
 
-            return {'status': True, 'result': PhotoEmotionDetector.handle_predictions(predictions, img, timestamp)}
+            return {'status': True, 'result': PhotoEmotionDetector.handle_predictions(predictions, img, input_file_name)}
         except:
             return {'status': False}
 
     @staticmethod
-    def crop_face(img, region, index, timestamp):
+    def crop_face(img, region, index, input_file_name):
         cropped_image = img[region['y']:region['y'] + region['h'], region['x']:region['x'] + region['w']]
-        file_path = f"main/static/main/tmp/photoAnalysis/res/{index}_{timestamp}_face.png"
+        file_path = f"main/static/main/tmp/photoAnalysis/res/{index}_{input_file_name}"
         cv2.imwrite(file_path, cropped_image)
 
         return file_path
@@ -127,7 +127,6 @@ class PhotoEmotionDetector:
     def handle_predictions(predictions, img, timestamp):
         result = []
         for index, value in enumerate(predictions):
-            # print(f'index: {index}, emotion: {value['emotion']}, region: {value['region']}')
             result.append({
                 'emotion': PhotoEmotionDetector.formalize_answer(value['emotion']),
                 'file_path': PhotoEmotionDetector.crop_face(img, value['region'], index, timestamp)

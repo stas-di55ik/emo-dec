@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="635bbd5f-a3bc-4da7-8b63-b5b422b2a7a9" name="Changes" comment="ig in progress">
+    <list default="true" id="635bbd5f-a3bc-4da7-8b63-b5b422b2a7a9" name="Changes" comment="ig almost finished">
       <change afterPath="$PROJECT_DIR$/.venv/Lib/site-packages/Jinja2-3.1.3.dist-info/INSTALLER" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.venv/Lib/site-packages/Markdown-3.6.dist-info/INSTALLER" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.venv/Lib/site-packages/MarkupSafe-2.1.5.dist-info/LICENSE.rst" afterDir="false" />
@@ -2777,13 +2777,13 @@
       <change afterPath="$PROJECT_DIR$/.venv/Lib/site-packages/~ensorflow/xla_aot_runtime_src/xla/service/cpu/runtime_matmul_common.h" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.venv/Lib/site-packages/~ensorflow/xla_aot_runtime_src/xla/service/cpu/runtime_matmul_f32.cc" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.venv/Lib/site-packages/~ensorflow/xla_aot_runtime_src/xla/service/cpu/runtime_single_threaded_matmul_s32.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webApp/main/templates/main/igPublicationAuditProfileResult.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webApp/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webApp/main/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/main/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webApp/main/services/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/.venv/Lib/site-packages/deepface/detectors/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webApp/main/services/faceEmotionDetector/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/.venv/Lib/site-packages/instagram_basic_display-1.2.0.dist-info/REQUESTED" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webApp/main/services/faceEmotionDetector/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/.venv/Lib/site-packages/joblib/test/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webApp/main/templates/main/igPublicationAuditProfile.html" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/main/templates/main/igPublicationAuditProfile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webApp/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/main/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webApp/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/main/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -3022,7 +3022,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713467824678</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="ig almost finished">
+      <option name="closed" value="true" />
+      <created>1713558677028</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1713558677028</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -3046,7 +3054,8 @@
     <MESSAGE value="FER finished" />
     <MESSAGE value="ig soft start" />
     <MESSAGE value="ig in progress" />
-    <option name="LAST_COMMIT_MESSAGE" value="ig in progress" />
+    <MESSAGE value="ig almost finished" />
+    <option name="LAST_COMMIT_MESSAGE" value="ig almost finished" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
