@@ -3,6 +3,7 @@ body {
 }
 
 aside {
+    position: fixed;
     float: left;
     background: #7996e3;
     width: 20%;
@@ -48,11 +49,11 @@ aside ul li:hover, aside ul a:hover {
 }
 
 main .features {
-    float: left;
     color: #000;
-    margin-top: 80px;
     text-align: center;
-    width: 75%
+    width: 75%;
+    margin-left: 20%;
+    margin-right: auto;
 }
 
 main .features h1 {
@@ -66,7 +67,7 @@ main .features p {
 }
 
 form {
-    margin-left: 32%;
+    margin-left: 28%;
     width: 500px;
     margin-top: 30px;
 }

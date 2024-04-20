@@ -6,11 +6,11 @@
     <div class="features">
         <h1>Facial emotion recognition</h1><br>
         <p><b>Input photo:</b></p>
-        <img src="{{ input_file_path }}" alt="Input photo"><br>
+        <img src="{{ input_file_path }}" alt="Input photo" width="420" height="480"><br>
         <p><b>Result:</b></p>
         {% if status %}
             {% for element in result%}
-                <img src="{{ element.file_path }}" alt="The cropped face">
+                <img src="{{ element.file_path }}" alt="The cropped face" width="420" height="480">
                 <p><i class="fa-regular fa-face-angry"></i> Angry: <b>{{ element.emotion.angry }}</b></p>
                 <p><i class="fa-regular fa-face-grimace"></i> Disgust: <b>{{ element.emotion.disgust }}</b></p>
                 <p><i class="fa-regular fa-face-flushed"></i> Fear: <b>{{ element.emotion.fear }}</b></p>
