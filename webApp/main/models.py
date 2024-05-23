@@ -107,12 +107,27 @@ class TextSentimentAnalyser:
 class PhotoEmotionDetector:
     @staticmethod
     def analyze(input_file_path, input_file_name):
+        backends = [
+            'opencv',      # 0 (default)
+            'ssd',         # 1
+            'dlib',        # 2
+            'mtcnn',       # 3
+            'fastmtcnn',   # 4
+            'retinaface',  # 5 (the highest accuracy)
+            'mediapipe',   # 6
+            'yolov8',      # 7
+            'yunet',       # 8
+            'centerface',  # 9
+        ]
+
         img = cv2.imread(input_file_path)
         try:
-            predictions = DeepFace.analyze(img)
+            predictions = DeepFace.analyze(img, ['emotion'], detector_backend=backends[5])
 
             return {'status': True, 'result': PhotoEmotionDetector.handle_predictions(predictions, img, input_file_name)}
-        except:
+        except Exception as e:
+            print(f"Error analyzing image: {e}")
+
             return {'status': False}
 
     @staticmethod

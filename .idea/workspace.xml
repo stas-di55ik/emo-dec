@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="635bbd5f-a3bc-4da7-8b63-b5b422b2a7a9" name="Changes" comment="ig finished">
+    <list default="true" id="635bbd5f-a3bc-4da7-8b63-b5b422b2a7a9" name="Changes" comment="finished">
+      <change afterPath="$PROJECT_DIR$/webApp/main/static/main/tmp/photoAnalysis/req/1716497091520570_photo_2024-04-20_22-21-43.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webApp/main/static/main/tmp/photoAnalysis/req/1716499756345171_test2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webApp/main/static/main/tmp/photoAnalysis/res/0_1716499756345171_test2.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webApp/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webApp/main/static/main/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/main/static/main/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webApp/main/templates/main/faceEmotionDetectionResult.html" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/main/templates/main/faceEmotionDetectionResult.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webApp/main/templates/main/igPublicationAuditProfileResult.html" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/main/templates/main/igPublicationAuditProfileResult.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webApp/main/templates/main/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/main/templates/main/layout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webApp/main/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/main/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +53,7 @@
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;Python.main (1).executor&quot;: &quot;Run&quot;,
     &quot;Python.main (2).executor&quot;: &quot;Run&quot;,
+    &quot;Python.main (3).executor&quot;: &quot;Run&quot;,
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
     &quot;Python.setting.executor&quot;: &quot;Run&quot;,
     &quot;Python.settings.executor&quot;: &quot;Run&quot;,
@@ -287,7 +288,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713631048540</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="finished">
+      <option name="closed" value="true" />
+      <created>1713642747903</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1713642747903</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -313,7 +322,8 @@
     <MESSAGE value="ig in progress" />
     <MESSAGE value="ig almost finished" />
     <MESSAGE value="ig finished" />
-    <option name="LAST_COMMIT_MESSAGE" value="ig finished" />
+    <MESSAGE value="finished" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
