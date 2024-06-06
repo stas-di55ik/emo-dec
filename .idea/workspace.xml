@@ -4,13 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="635bbd5f-a3bc-4da7-8b63-b5b422b2a7a9" name="Changes" comment="finished">
-      <change afterPath="$PROJECT_DIR$/webApp/main/static/main/tmp/photoAnalysis/req/1716497091520570_photo_2024-04-20_22-21-43.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webApp/main/static/main/tmp/photoAnalysis/req/1716499756345171_test2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webApp/main/static/main/tmp/photoAnalysis/res/0_1716499756345171_test2.jpg" afterDir="false" />
+    <list default="true" id="635bbd5f-a3bc-4da7-8b63-b5b422b2a7a9" name="Changes" comment="specified face detector">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webApp/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webApp/main/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/main/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webApp/main/static/main/tmp/photoAnalysis/req/1716497091520570_photo_2024-04-20_22-21-43.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webApp/main/static/main/tmp/photoAnalysis/req/1716499756345171_test2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webApp/main/static/main/tmp/photoAnalysis/res/0_1716499756345171_test2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webApp/main/templates/main/faceEmotionDetectionResult.html" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/main/templates/main/faceEmotionDetectionResult.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webApp/main/templates/main/textSentimentAnalysisResult.html" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/main/templates/main/textSentimentAnalysisResult.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webApp/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/webApp/main/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,24 +50,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Python.main (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.main (2).executor&quot;: &quot;Run&quot;,
-    &quot;Python.main (3).executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.setting.executor&quot;: &quot;Run&quot;,
-    &quot;Python.settings.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/Desktop/emo-dec/pythonProject/webApp/main/templates/main&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Python.main (1).executor": "Run",
+    "Python.main (2).executor": "Run",
+    "Python.main (3).executor": "Debug",
+    "Python.main.executor": "Run",
+    "Python.setting.executor": "Run",
+    "Python.settings.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/User/Desktop/emo-dec/pythonProject/webApp/main/templates/main",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\User\Desktop\emo-dec\pythonProject\webApp\main\templates\main" />
@@ -296,7 +299,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713642747903</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="specified face detector">
+      <option name="closed" value="true" />
+      <created>1716501706177</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1716501706177</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -323,7 +334,8 @@
     <MESSAGE value="ig almost finished" />
     <MESSAGE value="ig finished" />
     <MESSAGE value="finished" />
-    <option name="LAST_COMMIT_MESSAGE" value="finished" />
+    <MESSAGE value="specified face detector" />
+    <option name="LAST_COMMIT_MESSAGE" value="specified face detector" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

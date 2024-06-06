@@ -6,7 +6,7 @@
     <div class="features">
         <h1>Facial emotion recognition</h1><br>
         <p><b>Input photo:</b></p>
-        <img src="{{ input_file_path }}" alt="Input photo" width="420" height="480"><br>
+            <img src="{{ input_file_path }}" alt="Input photo" style="max-width: 420px; height: auto;">
         <p><b>Result:</b></p>
         {% if status %}
             {% for element in result%}

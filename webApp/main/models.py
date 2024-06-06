@@ -18,6 +18,8 @@ from deepface import DeepFace
 
 from instagram_basic_display.InstagramBasicDisplay import InstagramBasicDisplay
 import requests
+import os
+from threading import Timer
 from .secrets import IG_ACCESS_TOKEN
 
 
@@ -36,14 +38,22 @@ class TextSentimentAnalyser:
         print(f"clean_text: {clean_text}")
         valuable_words = TextSentimentAnalyser.get_valuable_words(clean_text)
         print(f"valuable_words: {valuable_words}")
+        tsa_result = TextSentimentAnalyser.sentiment_analyse(clean_text)
+        print(f"result: {tsa_result}")
         emotion_list = TextSentimentAnalyser.get_emotion_list(valuable_words)
         print(f"emotion_list: {emotion_list}")
-        result = TextSentimentAnalyser.sentiment_analyse(clean_text)
-        print(f"result: {result}")
-        plot_path = TextSentimentAnalyser.plot(emotion_list, timestamp)
-        print(f"plot_path: {plot_path}")
 
-        return {'input_text': input_text, 'result': result, 'emotion_list': emotion_list, 'plot_path': plot_path}
+        plot_path = None
+        plot_potential = bool(emotion_list)
+        if plot_potential:
+            plot_path = TextSentimentAnalyser.plot(emotion_list, timestamp)
+            print(f"plot_path: {plot_path}")
+
+        return {
+            'input_text': input_text,
+            'result': tsa_result,
+            'plot_path': plot_path
+        }
 
     @staticmethod
     def get_clean_text(input_text):
@@ -100,8 +110,9 @@ class TextSentimentAnalyser:
         fig.autofmt_xdate()
         filename = f"main/static/main/tmp/textAnalysis/{timestamp}_graph.png"
         plt.savefig(filename)
+        Timer(30.0, lambda: os.remove(filename)).start()
 
-        return filename
+        return filename.lstrip()[5:]
 
 
 class PhotoEmotionDetector:
@@ -121,22 +132,31 @@ class PhotoEmotionDetector:
         ]
 
         img = cv2.imread(input_file_path)
+        Timer(60.0, lambda: os.remove(input_file_path)).start()
         try:
             predictions = DeepFace.analyze(img, ['emotion'], detector_backend=backends[5])
 
-            return {'status': True, 'result': PhotoEmotionDetector.handle_predictions(predictions, img, input_file_name)}
+            return {
+                    'status': True,
+                    'result': PhotoEmotionDetector.handle_predictions(predictions, img, input_file_name),
+                    'input_file_path': input_file_path.lstrip()[5:]
+            }
         except Exception as e:
             print(f"Error analyzing image: {e}")
 
-            return {'status': False}
+            return {
+                'input_file_path': input_file_path.lstrip()[5:],
+                'status': False
+            }
 
     @staticmethod
     def crop_face(img, region, index, input_file_name):
         cropped_image = img[region['y']:region['y'] + region['h'], region['x']:region['x'] + region['w']]
         file_path = f"main/static/main/tmp/photoAnalysis/res/{index}_{input_file_name}"
         cv2.imwrite(file_path, cropped_image)
+        Timer(60.0, lambda: os.remove(file_path)).start()
 
-        return file_path
+        return file_path.lstrip()[5:]
 
     @staticmethod
     def handle_predictions(predictions, img, timestamp):
@@ -161,6 +181,17 @@ class PhotoEmotionDetector:
             'neutral': f'{round(emotion['neutral'], 2)}%',
         }
 
+    @staticmethod
+    def download_image(input_file, input_file_path):
+        # try:
+        with open(input_file_path, 'wb') as destination:
+            for chunk in input_file.chunks():
+                destination.write(chunk)
+        print(f'Uploaded image saved at:', input_file_path)
+        #
+        # except Exception as e:
+        #     print(f"Error downloading image: {e}")
+
 
 class InstagramAPIHelper:
     def __init__(self, ig_app_id, ig_app_secret):
@@ -173,6 +204,7 @@ class InstagramAPIHelper:
             app_id=self.ig_app_id,
             app_secret=self.ig_app_secret,
             redirect_url='https://www.google.com.ua/?hl=uk',
+            # redirect_url='http://localhost:8000',
         )
 
     def get_login_url(self):
@@ -186,8 +218,28 @@ class InstagramAPIHelper:
         # short_lived_token = self.api.get_o_auth_token(code)
         # long_lived_token = self.api.get_long_lived_token(short_lived_token.get('access_token'))
         # access_token = long_lived_token.access_token
+        # self.api.set_access_token(access_token)
+
         access_token = IG_ACCESS_TOKEN
         self.api.set_access_token(access_token)
 
     def get_profile_data(self):
-        return {'profile': self.api.get_user_profile(), 'user_media': self.api.get_user_media()}
+        return {
+            'profile': self.api.get_user_profile(),
+            'user_media': self.api.get_user_media()
+        }
+
+    @staticmethod
+    def download_image_by_url(url, save_path):
+        try:
+            response = requests.get(url)
+            response.raise_for_status()
+            with open(save_path, 'wb') as file:
+                file.write(response.content)
+            print(f"Image downloaded successfully to {save_path}")
+
+            return True
+        except Exception as e:
+            print(f"Error downloading image: {e}")
+
+            return False
