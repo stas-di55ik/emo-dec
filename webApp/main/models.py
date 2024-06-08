@@ -183,14 +183,14 @@ class PhotoEmotionDetector:
 
     @staticmethod
     def download_image(input_file, input_file_path):
-        # try:
-        with open(input_file_path, 'wb') as destination:
-            for chunk in input_file.chunks():
-                destination.write(chunk)
-        print(f'Uploaded image saved at:', input_file_path)
-        #
-        # except Exception as e:
-        #     print(f"Error downloading image: {e}")
+        try:
+            with open(input_file_path, 'wb') as destination:
+                for chunk in input_file.chunks():
+                    destination.write(chunk)
+            print(f'Uploaded image saved at:', input_file_path)
+
+        except Exception as e:
+            print(f"Error downloading image: {e}")
 
 
 class InstagramAPIHelper:
