@@ -39,7 +39,7 @@ def faceEmotionDetection(request):
 
         return render(request, 'main/faceEmotionDetectionResult.html', result)
 
-    return render(request, 'main/faceEmotionDetection.html')
+    return render(request, 'main/faceEmotionDetectionInput.html')
 
 
 def textSentimentAnalysis(request):
@@ -62,7 +62,7 @@ def textSentimentAnalysis(request):
         'error': error
     }
 
-    return render(request, 'main/textSentimentAnalysis.html', data)
+    return render(request, 'main/textSentimentAnalysisInput.html', data)
 
 
 def igPublicationAudit(request):
@@ -78,7 +78,7 @@ def igPublicationAudit(request):
 
     data = {'login_url': login_url}
 
-    return render(request, 'main/igPublicationAudit.html', data)
+    return render(request, 'main/igPublicationAuditBegin.html', data)
 
 
 def igPublicationAuditProfile(request):
@@ -132,4 +132,4 @@ def igPublicationAuditProfile(request):
             'fer_web_dicts': fer_web_dicts
         })
 
-    return render(request, 'main/igPublicationAuditProfile.html', profile_data)
+    return render(request, 'main/igPublicationAuditProfileOutput.html', profile_data)
