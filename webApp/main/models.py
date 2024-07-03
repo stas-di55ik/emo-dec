@@ -65,7 +65,7 @@ class TextSentimentAnalyser:
 
     @staticmethod
     def get_valuable_words(input_text):
-        tokenized_words = word_tokenize(input_text, "english")
+        tokenized_words = word_tokenize(input_text, "english", preserve_line=True)
         valuable_words = TextSentimentAnalyser.remove_stopwords(tokenized_words)
 
         return valuable_words
@@ -213,12 +213,13 @@ class InstagramAPIHelper:
 
         return self.api.get_login_url()
 
-    def init_token(self, request):
+    def init_token(self):
         # code = request.args.get('code')
         # short_lived_token = self.api.get_o_auth_token(code)
         # long_lived_token = self.api.get_long_lived_token(short_lived_token.get('access_token'))
         # access_token = long_lived_token.access_token
         # self.api.set_access_token(access_token)
+        # print(f"short_lived_token: {}\n\n\n\n")
 
         access_token = IG_ACCESS_TOKEN
         self.api.set_access_token(access_token)

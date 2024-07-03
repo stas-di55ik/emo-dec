@@ -71,7 +71,7 @@ def igPublicationAudit(request):
     login_url = ig_helper.get_login_url()
 
     if request.method == 'POST':
-        ig_helper.init_token(request)
+        ig_helper.init_token()
         profile_data = ig_helper.get_profile_data()
         request.session['profile_data'] = profile_data
         return redirect('igPublicationAuditProfile')
